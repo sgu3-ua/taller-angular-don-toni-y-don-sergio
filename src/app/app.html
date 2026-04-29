@@ -6,14 +6,14 @@
     </div>
     <div class="flex-container" [ngStyle]="{ 'background-color': '#EEEEEE', 'padding': '20px', 'border-radius': '10px' }">
       <div *ngFor="let item of listas">
-          <div class="card" [ngStyle]="{ 'background-color': item.color, 'border': '1px solid #CCCCCC' }">
+          <div class="card" [ngStyle]="{ 'background-color': item.color, 'border': '1px solid #CCCCCC', 'margin-left': '5%', 'margin-right': '5%', 'border-radius': '5px' }">
             <h3>{{ item.nombre }}</h3>
             <h4>Descripción:</h4>
             <p>{{ item.descripcion }}</p>
               <div class="card-footer" [ngStyle]="{ 'background-color': '#AAAAAA' }">
-                <button class="btn btn-primary">Ver detalles</button>
-                <button class="btn btn-warning">Modificar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <button class="btn btn-primary" style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;">Ver detalles</button>
+                <button class="btn btn-warning" style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;">Modificar</button>
+                <button class="btn btn-danger" style="padding: 1%; border-top: 1px solid #CCCCCC;">Eliminar</button>
               </div>
           </div>
           <br>
