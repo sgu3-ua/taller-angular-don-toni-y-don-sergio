@@ -1,0 +1,28 @@
+<div class="flex-container" [ngStyle]="{ 'background-color': '#EEEEEE', 'padding': '20px', 'border-radius': '10px' }">
+    <div *ngFor="let item of listas">
+        <div id="lista-{{ item.identificador }}" class="card"
+            [ngStyle]="{ 'background-color': item.color, 'border': '1px solid #CCCCCC', 'margin-left': '5%', 'margin-right': '5%', 'border-radius': '5px' }">
+            <h3>{{ item.nombre }}</h3>
+            <div *ngIf = "isExpanded(item.identificador)" class="card-body">
+                <h4 >Descripción:</h4>
+                <p>{{ item.descripcion }}</p>
+                <p>Creado: {{ item.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss' }}</p>
+            </div>
+            <div class="card-footer" [ngStyle]="{ 'background-color': '#AAAAAA' }">
+                <!-- Oculta y muestra la descripción -->
+                <button (click)="toggleDescripcion(item.identificador)" class="btn btn-primary"
+                    style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;"> {{ isExpanded(item.identificador) ? 'Ocultardetalles' : 'Ver detalles' }}</button>
+
+                <button class="btn btn-warning"
+                    style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;">Modificar</button>
+                <button *ngIf="wantToDeleteIndex !== item.identificador" (click)="wantToDelete(item.identificador)" class="btn btn-danger" style="padding: 1%; border-top: 1px solid #CCCCCC;">Eliminar</button>
+                <div *ngIf="wantToDeleteIndex === item.identificador">
+                    <p>¿Estás seguro de que deseas eliminar esta lista?</p>
+                    <button (click)="this.delete.emit(item.identificador)" class="btn btn-danger" style="padding: 1%; border-top: 1px solid #CCCCCC;">Sí, eliminar</button>
+                    <button (click)="wantToDeleteIndex = null" class="btn btn-secondary" style="padding: 1%; border-top: 1px solid #CCCCCC; margin-left: 1%;">No, cancelar</button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

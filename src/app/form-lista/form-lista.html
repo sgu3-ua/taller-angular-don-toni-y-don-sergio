@@ -1,0 +1,17 @@
+
+
+<form #formLista="ngForm" (ngSubmit)="onSubmit(formLista)" style="background-color: #F5F5F5; padding: 20px; border-radius: 10px; margin-bottom: 20px; width: 30%;">
+    <div class="form-group">
+        <label for="nombre">Nombre de la lista:</label>
+        <input type="text" id="nombreLista" class="form-control" placeholder="Ingrese el nombre de la lista" name="nombreLista" required [(ngModel)]="lista.nombre">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcionLista" class="form-control" placeholder="Ingrese una descripción para la lista" name="descripcionLista" required [(ngModel)]="lista.descripcion"></textarea>
+        <label for="color">Color:</label>
+        <!-- Un cudrado deberia ser-->
+        <input  style="width: 10%; height: 38px;" type="color" id="colorLista" class="form-control" value="#FFFFFF" name="colorLista" [(ngModel)]="lista.color">
+        <label for="visible" class="form-check-label">Visible:</label>
+        <input [ngModel]="lista.visible" type="checkbox" id="visible" class="form-check-input" name="visible">
+        <br>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Añadir lista</button>    
+    </div>
+</form>

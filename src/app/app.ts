@@ -13,4 +13,14 @@ export class App {
      new Lista("Lista 2", "Descripción de la lista 2", "#33FF57"), 
      new Lista("Lista 3", "Descripción de la lista 3", "#3357FF")];
   protected readonly title = signal('appListas');
+
+  addLista(item: Lista) {
+    console.log("Agregando lista:");
+    console.log(item);
+    this.listas.push(item);
+  }
+
+  deleteLista(identificador: number) {
+    this.listas = this.listas.filter((lista) => lista.identificador !== identificador);
+  }
 }
