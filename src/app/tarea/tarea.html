@@ -1,0 +1,5 @@
+<div class="tarea-item" [ngClass]="{ 'completed': tarea.completada }">
+  <input type="checkbox" [checked]="tarea.completada" (change)="onToggle()" />
+  <span class="titulo">{{ tarea.titulo }}</span>
+  <button class="btn btn-sm btn-danger" (click)="onDelete()">Eliminar</button>
+</div>

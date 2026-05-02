@@ -2,12 +2,20 @@
   <div class="content">
     <div>
       <h1>Bienvenido a nuestra aplicación de tareas</h1>
-      <h2>Creado por: Don Sergio y Don Toni</h2>
+      <h2>Creado por: Sergio González Urbán y Antonio Mainar Sánchez</h2>
     <div>
-      <button class="btn btn-success" style="padding: 1%; border-radius: 5px; margin-bottom: 20px;">Crear nueva lista</button>
-      <app-form-lista (created)="addLista($event)"></app-form-lista>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom: 12px;">
+        <button class="btn btn-success" style="padding: 1%; border-radius: 5px;" (click)="toggleForm()">{{ showForm ? 'Cancelar' : 'Crear nueva lista' }}</button>
+        <label style="margin:0;">Filtrar:</label>
+        <select [(ngModel)]="filter" class="form-control" style="width:180px; display:inline-block;">
+          <option value="all">Todas</option>
+          <option value="visible">Visibles</option>
+          <option value="hidden">No visibles</option>
+        </select>
+      </div>
+      <app-form-lista *ngIf="showForm" [editLista]="editingLista" (created)="addLista($event)" (updated)="updateLista($event)"></app-form-lista>
     </div>
-      <app-lista [listas]="listas" (delete)="deleteLista($event)"></app-lista>
+      <app-lista [listas]="filteredListas" (delete)="deleteLista($event)" (update)="startEdit($event)"></app-lista>
   </div>
   </div> 
 </main>

@@ -10,8 +10,8 @@
         <!-- Un cudrado deberia ser-->
         <input  style="width: 10%; height: 38px;" type="color" id="colorLista" class="form-control" value="#FFFFFF" name="colorLista" [(ngModel)]="lista.color">
         <label for="visible" class="form-check-label">Visible:</label>
-        <input [ngModel]="lista.visible" type="checkbox" id="visible" class="form-check-input" name="visible">
+        <input [(ngModel)]="lista.visible" type="checkbox" id="visible" class="form-check-input" name="visible">
         <br>
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Añadir lista</button>    
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">{{ isEditMode ? 'Modificar lista' : 'Añadir lista' }}</button>    
     </div>
 </form>

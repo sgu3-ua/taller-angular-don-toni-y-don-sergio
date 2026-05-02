@@ -1,19 +1,38 @@
 <div class="flex-container" [ngStyle]="{ 'background-color': '#EEEEEE', 'padding': '20px', 'border-radius': '10px' }">
     <div *ngFor="let item of listas">
         <div id="lista-{{ item.identificador }}" class="card"
-            [ngStyle]="{ 'background-color': item.color, 'border': '1px solid #CCCCCC', 'margin-left': '5%', 'margin-right': '5%', 'border-radius': '5px' }">
+            [ngStyle]="{ '--list-color': item.color, 'background-color': item.color, 'border': '1px solid #CCCCCC', 'margin-left': '5%', 'margin-right': '5%', 'border-radius': '5px' }">
             <h3>{{ item.nombre }}</h3>
             <div *ngIf = "isExpanded(item.identificador)" class="card-body">
                 <h4 >Descripción:</h4>
                 <p>{{ item.descripcion }}</p>
                 <p>Creado: {{ item.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss' }}</p>
+                <div class="tareas-section">
+                    <h4>Tareas</h4>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                        <label style="margin:0;">Filtrar tareas:</label>
+                        <select class="form-control" style="width:180px; display:inline-block;" [ngModel]="getTaskFilter(item.identificador)" (ngModelChange)="setTaskFilter(item.identificador, $event)">
+                            <option value="all">Todas</option>
+                            <option value="done">Terminadas</option>
+                            <option value="todo">No terminadas</option>
+                        </select>
+                    </div>
+                    <div *ngIf="getFilteredTasks(item).length === 0">No hay tareas.</div>
+                    <div *ngFor="let tarea of getFilteredTasks(item)">
+                        <app-tarea [tarea]="tarea" (toggled)="toggleTask(item, $event)" (remove)="deleteTask(item, $event)"></app-tarea>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <input #newTaskTitle type="text" placeholder="Nueva tarea" class="form-control" style="width:60%; display:inline-block; margin-right:8px;" />
+                        <button class="btn btn-primary" (click)="addTask(item, newTaskTitle.value); newTaskTitle.value=''">Añadir tarea</button>
+                    </div>
+                </div>
             </div>
             <div class="card-footer" [ngStyle]="{ 'background-color': '#AAAAAA' }">
                 <!-- Oculta y muestra la descripción -->
                 <button (click)="toggleDescripcion(item.identificador)" class="btn btn-primary"
-                    style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;"> {{ isExpanded(item.identificador) ? 'Ocultardetalles' : 'Ver detalles' }}</button>
+                    style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;"> {{ isExpanded(item.identificador) ? 'Ocultar detalles' : 'Ver detalles' }}</button>
 
-                <button class="btn btn-warning"
+                <button (click)="this.update.emit(item)" class="btn btn-warning"
                     style="padding: 1%; border-top: 1px solid #CCCCCC; margin-right: 1%;">Modificar</button>
                 <button *ngIf="wantToDeleteIndex !== item.identificador" (click)="wantToDelete(item.identificador)" class="btn btn-danger" style="padding: 1%; border-top: 1px solid #CCCCCC;">Eliminar</button>
                 <div *ngIf="wantToDeleteIndex === item.identificador">

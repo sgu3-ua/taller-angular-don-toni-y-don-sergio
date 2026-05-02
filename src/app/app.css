@@ -1,0 +1,23 @@
+.main {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content h1 {
+  font-size: 32px;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.content h2 {
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+  margin: 0 0 24px 0;
+}
